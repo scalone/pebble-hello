@@ -1,0 +1,18 @@
+{
+  "uuid": "7ec59a0e-d736-4f16-8658-224025408af1",
+  "shortName": "pebble-hello",
+  "longName": "pebble-hello",
+  "companyName": "MakeAwesomeHappen",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt"],
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
