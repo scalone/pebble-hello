@@ -1,4 +1,9 @@
 #include <pebble.h>
+#include <string.h>
+#include "mruby.h"
+#include "mruby/value.h"
+#include "mruby/compile.h"
+#include "mruby/proc.h"
 
 static Window *window;
 static TextLayer *text_layer;
@@ -50,8 +55,35 @@ static void deinit(void) {
   window_destroy(window);
 }
 
+int mruby_execute(void)
+{
+  mrb_state *mrb;
+  mrbc_context *c;
+  static int s_buffer[5];
+  char code[] = "puts 'aaaaa'";
+
+  mrb = mrb_open();
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test 1");
+
+  c = mrbc_context_new(mrb);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test 2");
+
+  mrb_load_string_cxt(mrb, code, c);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test 3");
+
+  mrbc_context_free(mrb, c);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test 4");
+
+  mrb_close(mrb);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test 5");
+
+  return 0;
+}
+
 int main(void) {
   init();
+
+  /*mruby_execute();*/
 
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
 
