@@ -27,7 +27,10 @@ def build(ctx):
         ctx.set_group(ctx.env.PLATFORM_NAME)
         app_elf='{}/pebble-app.elf'.format(ctx.env.BUILD_DIR)
         ctx.pbl_program(source=ctx.path.ant_glob('src/**/*.c'),
-        target=app_elf)
+        target=app_elf,
+				stlibpath='/Users/thiagoscalone/projects/github.com/scalone/pebble-hello/mruby/build/pebble-time/lib/',
+				includes=['mruby/include'],
+				stlib='mruby')
 
         if build_worker:
             worker_elf='{}/pebble-worker.elf'.format(ctx.env.BUILD_DIR)
@@ -39,3 +42,4 @@ def build(ctx):
 
     ctx.set_group('bundle')
     ctx.pbl_bundle(binaries=binaries, js=ctx.path.ant_glob('src/js/**/*.js'))
+
